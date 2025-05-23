@@ -1,2 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Wallet.Data;
+
+Console.WriteLine(Constants.SubmitActionPrompt);
+string? action = Console.ReadLine();
+
+while(action != )
+
