@@ -27,6 +27,10 @@ namespace Wallet.Validators
             {
                 AddValidationError(Constants.AmountMustBeANumberError);
             }
+            else if(amount <= 0)
+            {
+                AddValidationError(Constants.AmountMustBePositiveError);
+            }
 
             return ValidationErrors;
         }
@@ -36,7 +40,7 @@ namespace Wallet.Validators
             var context = new ValidationContext(obj);
             var results = new List<ValidationResult>();
 
-            bool isValid = System.ComponentModel.DataAnnotations.Validator.TryValidateObject(request, context, results, validateAllProperties: true);
+            bool isValid = System.ComponentModel.DataAnnotations.Validator.TryValidateObject(obj, context, results, validateAllProperties: true);
 
             if (!isValid)
             {

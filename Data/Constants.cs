@@ -13,17 +13,22 @@ namespace Wallet.Data
         internal const string InvalidActionError = "Invalid command format. Use: <command> <amount>";
         internal const string CommandMustBeAStringError = "Command must be a string.";
         internal const string AmountMustBeANumberError = "Amount must be a number.";
+        internal const string AmountMustBePositiveError = "Amount must be positive.";
         internal const string ExitCommand = "Exit";
         internal const string GoodbyeMessage = "Thank you for playing! Hope to see you again soon!";
-        
+        internal const string SuccessfulDepositMessage = "Your deposit of ${0} was successful. Your new balance is: ${1}";
+        internal const string InsufficientFundsMessage = "Insufficient funds for withdrawal.";
+
         internal const decimal MinBetAmount = 1;
 
-        internal enum Actions
+        internal static class Actions
         {
-            Deposit = 1,
-            Bet = 2,
-            Withdraw = 3,
-            Exit = 4
+            public const string Deposit = "deposit";
+            public const string Bet = "bet";
+            public const string Withdraw = "withdraw";
+            public const string Exit = "exit";
+
+            public static readonly List<string> All = new() { Deposit, Bet, Withdraw, Exit };
         }
     }
 }

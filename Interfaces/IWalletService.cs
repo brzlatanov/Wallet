@@ -8,5 +8,6 @@ namespace Wallet.Interfaces
 {
     internal interface IWalletService
     {
+        decimal Deposit(Decimal amount);
     }
 }

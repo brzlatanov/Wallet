@@ -10,9 +10,10 @@ using Wallet.Validators;
 // [x] Controller gets view with dependency injection 
 
 var serviceProvider = new ServiceCollection()
-            .AddSingleton<IView, ConsoleView>()
+            .AddTransient<IView, ConsoleView>()
             .AddTransient<IValidator, Validator>()
             .AddTransient<IWalletService, WalletService>()
+            .AddTransient<ICommandHandler, DepositCommandHandler>()
             .AddSingleton<GameController>() 
             .BuildServiceProvider();
 

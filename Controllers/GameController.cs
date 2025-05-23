@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using Wallet;
-using Wallet.Interfaces;
+﻿using Wallet.Interfaces;
 using Wallet.Models;
 
 namespace Wallet.Controllers
@@ -9,10 +7,14 @@ namespace Wallet.Controllers
     {
         IView view;
         IValidator validator;
-        public GameController(IView view, IValidator validator)
+        IEnumerable<ICommandHandler> handlers;
+        public GameController(IView view,
+            IValidator validator,
+            IEnumerable<ICommandHandler> handlers)
         {
             this.view = view;
             this.validator = validator;
+            this.handlers = handlers;
         }
 
         public void ProcessInput(string input)
@@ -21,20 +23,26 @@ namespace Wallet.Controllers
 
             if (errors.Any())
             {
-                view.RenderView(errors.Any() ? errors : null);
+                view.RenderView(errors);
                 return;
             }
 
             string command = input.Split(" ")[0];
             decimal amount = decimal.Parse(input.Split(" ")[1]);
 
-            var actionRequest = new ActionRequest
+            var handler = handlers.FirstOrDefault(h => h.CanHandle(command));
+            if (handler != null)
             {
-                Command = command,
-                Amount = amount
-            };
-
-            // need validation and splitting into handlers - command pattern? 
+                try
+                {
+                    var message = handler.Handle(amount);
+                    view.RenderView(new List<string> { message });
+                }
+                catch (Exception ex)
+                {
+                    view.RenderView(new List<string> { ex.Message });
+                }
+            }
         }
     }
 }

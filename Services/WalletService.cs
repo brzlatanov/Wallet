@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Wallet.Interfaces;
+using Wallet.Data;
 
 namespace Wallet.Services
 {
@@ -11,13 +8,23 @@ namespace Wallet.Services
     {
         public decimal balance = 0;
 
-        public void Deposit(decimal amount)
+        public decimal Deposit(decimal amount)
         {
-            if (amount <= 0)
-            {
-                throw new ArgumentException("Deposit amount must be positive.");
-            }
             balance += amount;
+            return balance;
+        }
+
+        public decimal Withdraw(decimal amount)
+        {
+            if (balance >= amount)
+            {
+                balance -= amount;
+                return balance;
+            }
+            else
+            {
+                throw new InvalidOperationException(Constants.InsufficientFundsMessage);
+            }
         }
     }
 }
