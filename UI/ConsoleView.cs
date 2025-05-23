@@ -10,8 +10,16 @@ namespace Wallet.UI
 {
     internal class ConsoleView : IView
     {
-        public void RenderView()
+        public void RenderView(IEnumerable<string>? messages)
         {
+            if (messages?.Any() == true)
+            {
+                foreach (var message in messages)
+                {
+                    Console.WriteLine(message);
+                }
+            }
+
             Console.WriteLine(Constants.SubmitActionPrompt);
         }
 
