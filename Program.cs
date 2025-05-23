@@ -1,7 +1,15 @@
-﻿using Wallet.Data;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Wallet.Controllers;
+using Wallet.Interfaces;
+using Wallet.UI;
 
-Console.WriteLine(Constants.SubmitActionPrompt);
-string? action = Console.ReadLine();
+// [x] Initialize controller
+// [x] Controller gets view with dependency injection 
 
-while(action != )
+var serviceProvider = new ServiceCollection()
+            .AddSingleton<IView, ConsoleView>()
+            .AddSingleton<GameController>() 
+            .BuildServiceProvider();
 
+var controller = serviceProvider.GetRequiredService<GameController>();
+controller.Run();
