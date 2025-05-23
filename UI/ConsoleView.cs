@@ -19,8 +19,6 @@ namespace Wallet.UI
                     Console.WriteLine(message);
                 }
             }
-
-            Console.WriteLine(Constants.SubmitActionPrompt);
         }
 
         public string ReceiveInput()

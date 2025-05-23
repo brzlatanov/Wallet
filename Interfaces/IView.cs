@@ -10,7 +10,5 @@ namespace Wallet.Interfaces
     internal interface IView
     {
         void RenderView(IEnumerable<string>? messages);
-
-        string ReceiveInput();
     }
 }

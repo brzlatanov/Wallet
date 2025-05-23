@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Wallet.Controllers;
+using Wallet.Data;
 using Wallet.Interfaces;
 using Wallet.UI;
 using Wallet.Validators;
@@ -14,4 +15,12 @@ var serviceProvider = new ServiceCollection()
             .BuildServiceProvider();
 
 var controller = serviceProvider.GetRequiredService<GameController>();
-controller.Run();
+
+while (true)
+{
+    Console.WriteLine(Constants.SubmitActionPrompt);
+    string input = Console.ReadLine();
+    if (input.Equals(Constants.ExitCommand, StringComparison.OrdinalIgnoreCase))
+        break;
+    controller.ProcessInput(input);
+}

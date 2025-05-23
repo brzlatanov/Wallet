@@ -13,21 +13,11 @@ namespace Wallet.Controllers
             this.view = view;
             this.validator = validator;
         }
-        public void Run()
+
+        public void ProcessInput(string input)
         {
-            this.view.RenderView(null);
-            string input = this.view.ReceiveInput();
-
-            while(input.ToLower() != Data.Constants.ExitCommand.ToLower())
-            {
-                IEnumerable<string> inputValidationErrors = this.validator.ValidateInput(input);
-
-                if (inputValidationErrors.Any())
-                {
-                    this.view.RenderView(inputValidationErrors);
-                    input = this.view.ReceiveInput();
-                }
-            }
+            var errors = validator.ValidateInput(input);
+            view.RenderView(errors.Any() ? errors : null);
         }
     }
 }
