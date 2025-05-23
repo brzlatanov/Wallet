@@ -2,6 +2,7 @@
 using Wallet.Controllers;
 using Wallet.Data;
 using Wallet.Interfaces;
+using Wallet.Services;
 using Wallet.UI;
 using Wallet.Validators;
 
@@ -10,7 +11,8 @@ using Wallet.Validators;
 
 var serviceProvider = new ServiceCollection()
             .AddSingleton<IView, ConsoleView>()
-            .AddSingleton<IValidator, StringValidator>()
+            .AddTransient<IValidator, Validator>()
+            .AddTransient<IWalletService, WalletService>()
             .AddSingleton<GameController>() 
             .BuildServiceProvider();
 
@@ -21,6 +23,10 @@ while (true)
     Console.WriteLine(Constants.SubmitActionPrompt);
     string input = Console.ReadLine();
     if (input.Equals(Constants.ExitCommand, StringComparison.OrdinalIgnoreCase))
+    {
+        Console.WriteLine(Constants.GoodbyeMessage);
         break;
+    }
+
     controller.ProcessInput(input);
 }

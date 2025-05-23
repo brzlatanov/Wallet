@@ -14,6 +14,7 @@ namespace Wallet.Data
         internal const string CommandMustBeAStringError = "Command must be a string.";
         internal const string AmountMustBeANumberError = "Amount must be a number.";
         internal const string ExitCommand = "Exit";
+        internal const string GoodbyeMessage = "Thank you for playing! Hope to see you again soon!";
         
         internal const decimal MinBetAmount = 1;
 

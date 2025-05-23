@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
-using Wallet.Interfaces;
 using Wallet;
+using Wallet.Interfaces;
+using Wallet.Models;
 
 namespace Wallet.Controllers
 {
@@ -17,7 +18,23 @@ namespace Wallet.Controllers
         public void ProcessInput(string input)
         {
             var errors = validator.ValidateInput(input);
-            view.RenderView(errors.Any() ? errors : null);
+
+            if (errors.Any())
+            {
+                view.RenderView(errors.Any() ? errors : null);
+                return;
+            }
+
+            string command = input.Split(" ")[0];
+            decimal amount = decimal.Parse(input.Split(" ")[1]);
+
+            var actionRequest = new ActionRequest
+            {
+                Command = command,
+                Amount = amount
+            };
+
+            // need validation and splitting into handlers - command pattern? 
         }
     }
 }
