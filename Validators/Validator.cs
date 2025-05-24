@@ -15,11 +15,12 @@ namespace Wallet.Validators
             if (string.IsNullOrWhiteSpace(value))
             {
                 AddValidationError(Constants.InvalidActionError);
+                return this.ValidationErrors;
             }
 
             var parts = value.Trim().Split(' ');
 
-            if (parts == null || parts.Length != 2)
+            if (parts.Length != 2)
             {
                 AddValidationError(Constants.InvalidActionError);
             }
@@ -32,7 +33,7 @@ namespace Wallet.Validators
                 AddValidationError(Constants.AmountMustBePositiveError);
             }
 
-            return ValidationErrors;
+            return this.ValidationErrors;
         }
 
         public IEnumerable<string> ValidateObject(object obj)
@@ -50,14 +51,14 @@ namespace Wallet.Validators
                 }
             }
 
-            return ValidationErrors;
+            return this.ValidationErrors;
         }
 
         public void AddValidationError(string error)
         {
-            if (!ValidationErrors.Contains(error))
+            if (!this.ValidationErrors.Contains(error))
             {
-                ValidationErrors.Add(error);
+                this.ValidationErrors.Add(error);
             }
         }
     }

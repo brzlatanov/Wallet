@@ -23,7 +23,7 @@ namespace Wallet.Services
             }
             else
             {
-                throw new InvalidOperationException(Constants.InsufficientFundsMessage);
+                throw new InvalidOperationException(String.Format(Constants.InsufficientFundsMessage, balance));
             }
         }
     }

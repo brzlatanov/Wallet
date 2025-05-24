@@ -19,28 +19,28 @@ namespace Wallet.Controllers
 
         public void ProcessInput(string input)
         {
-            var errors = validator.ValidateInput(input);
+            var errors = this.validator.ValidateInput(input);
 
             if (errors.Any())
             {
-                view.RenderView(errors);
+                this.view.RenderView(errors);
                 return;
             }
 
             string command = input.Split(" ")[0];
             decimal amount = decimal.Parse(input.Split(" ")[1]);
 
-            var handler = handlers.FirstOrDefault(h => h.CanHandle(command));
+            var handler = this.handlers.FirstOrDefault(h => h.CanHandle(command));
             if (handler != null)
             {
                 try
                 {
                     var message = handler.Handle(amount);
-                    view.RenderView(new List<string> { message });
+                    this.view.RenderView(new List<string> { message });
                 }
                 catch (Exception ex)
                 {
-                    view.RenderView(new List<string> { ex.Message });
+                    this.view.RenderView(new List<string> { ex.Message });
                 }
             }
         }

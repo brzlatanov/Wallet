@@ -1,4 +1,5 @@
 using Wallet.Data;
+using Wallet.Helpers;
 using Wallet.Interfaces;
 
 internal class DepositCommandHandler : ICommandHandler
@@ -14,7 +15,7 @@ internal class DepositCommandHandler : ICommandHandler
 
     public string Handle(Decimal amount)
     {
-        var newBalance = walletService.Deposit(amount);
-        return String.Format(Constants.SuccessfulDepositMessage, amount, newBalance);
+        var newBalance = this.walletService.Deposit(amount);
+        return FormatHelper.FormatMessage(Constants.SuccessfulDepositMessage, amount, newBalance);
     }
 }

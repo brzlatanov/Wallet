@@ -6,19 +6,18 @@ using Wallet.Services;
 using Wallet.UI;
 using Wallet.Validators;
 
-// [x] Initialize controller
-// [x] Controller gets view with dependency injection 
-
 var serviceProvider = new ServiceCollection()
             .AddTransient<IView, ConsoleView>()
             .AddTransient<IValidator, Validator>()
-            .AddTransient<IWalletService, WalletService>()
+            .AddSingleton<IWalletService, WalletService>()
             .AddTransient<ICommandHandler, DepositCommandHandler>()
-            .AddSingleton<GameController>() 
+            .AddTransient<ICommandHandler, WithdrawCommandHandler>()
+            .AddTransient<GameController>() 
             .BuildServiceProvider();
 
 var controller = serviceProvider.GetRequiredService<GameController>();
 
+// Core loop
 while (true)
 {
     Console.WriteLine(Constants.SubmitActionPrompt);

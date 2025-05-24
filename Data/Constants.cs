@@ -16,8 +16,9 @@ namespace Wallet.Data
         internal const string AmountMustBePositiveError = "Amount must be positive.";
         internal const string ExitCommand = "Exit";
         internal const string GoodbyeMessage = "Thank you for playing! Hope to see you again soon!";
-        internal const string SuccessfulDepositMessage = "Your deposit of ${0} was successful. Your new balance is: ${1}";
-        internal const string InsufficientFundsMessage = "Insufficient funds for withdrawal.";
+        internal const string SuccessfulDepositMessage = "Your deposit of {0} was successful. Your new balance is: {1}";
+        internal const string SuccessfulWithdrawalMessage = "Your withdrawal of {0} was successful. Your new balance is: {1}";
+        internal const string InsufficientFundsMessage = "Insufficient funds for withdrawal. Current balance: {0}";
 
         internal const decimal MinBetAmount = 1;
 
