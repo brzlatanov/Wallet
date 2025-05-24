@@ -9,6 +9,6 @@ namespace Wallet.Interfaces
 {
     internal interface IView
     {
-        void RenderView(IEnumerable<string>? messages);
+        void RenderView(string message);
     }
 }

@@ -8,7 +8,6 @@ namespace Wallet.Interfaces
 {
     internal interface IValidator
     {
-        IEnumerable<string> ValidateInput(string input);
-        void AddValidationError(string error);
+        string ValidateInput(string input);
     }
 }

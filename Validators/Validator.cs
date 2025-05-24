@@ -7,41 +7,31 @@ namespace Wallet.Validators
 {
     internal class Validator : IValidator
     {
-        List<string> ValidationErrors = new();
-        public IEnumerable<string> ValidateInput(string value)
+        public string ValidateInput(string value)
         {
-            ValidationErrors = new();
+            //var error = String.Empty;
 
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                AddValidationError(Constants.InvalidActionError);
-                return this.ValidationErrors;
-            }
+            //if (string.IsNullOrWhiteSpace(value))
+            //{
+            //    error = Constants.InvalidActionError;
+            //}
 
             var parts = value.Trim().Split(' ');
 
             if (parts.Length != 2)
             {
-                AddValidationError(Constants.InvalidActionError);
+                return Constants.InvalidActionError;
             }
             else if (!decimal.TryParse(parts[1], out var amount))
             {
-                AddValidationError(Constants.AmountMustBeANumberError);
+                return Constants.AmountMustBeANumberError;
             }
             else if(amount <= 0)
             {
-                AddValidationError(Constants.AmountMustBePositiveError);
+                return Constants.AmountMustBePositiveError;
             }
 
-            return this.ValidationErrors;
-        }
-
-        public void AddValidationError(string error)
-        {
-            if (!this.ValidationErrors.Contains(error))
-            {
-                this.ValidationErrors.Add(error);
-            }
+            return "";
         }
     }
 }

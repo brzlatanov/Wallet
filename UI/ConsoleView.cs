@@ -10,14 +10,11 @@ namespace Wallet.UI
 {
     internal class ConsoleView : IView
     {
-        public void RenderView(IEnumerable<string>? messages)
+        public void RenderView(string message)
         {
-            if (messages?.Any() == true)
+            if (!String.IsNullOrEmpty(message))
             {
-                foreach (var message in messages)
-                {
-                    Console.WriteLine(message);
-                }
+                Console.WriteLine(message);
             }
         }
     }

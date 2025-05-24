@@ -1,4 +1,6 @@
-﻿using Wallet.Interfaces;
+﻿using Wallet.Helpers;
+using Wallet.Interfaces;
+using Wallet.Data;
 
 namespace Wallet.Controllers
 {
@@ -18,11 +20,12 @@ namespace Wallet.Controllers
 
         public void ProcessInput(string input)
         {
-            var errors = this.validator.ValidateInput(input);
+            input = input.Trim();
+            var error = this.validator.ValidateInput(input);
 
-            if (errors.Any())
+            if (!String.IsNullOrEmpty(error))
             {
-                this.view.RenderView(errors);
+                this.view.RenderView(error);
                 return;
             }
 
@@ -36,16 +39,16 @@ namespace Wallet.Controllers
                 try
                 {
                     var message = handler.Handle(amount);
-                    this.view.RenderView(new List<string> { message });
+                    this.view.RenderView(message);
                 }
                 catch (Exception ex)
                 {
-                    this.view.RenderView(new List<string> { ex.Message });
+                    this.view.RenderView(ex.Message);
                 }
             }
             else
             {
-                this.view.RenderView(new List<string> { message })
+                this.view.RenderView(FormatHelper.FormatMessage(Constants.InvalidCommandError, String.Join(",", Constants.Actions.All)));
             }
         }
     }
