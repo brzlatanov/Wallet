@@ -1,6 +1,7 @@
 ﻿
 using Wallet.Interfaces;
 using Wallet.Data;
+using Wallet.Helpers;
 
 namespace Wallet.Services
 {
@@ -8,22 +9,25 @@ namespace Wallet.Services
     {
         public decimal balance = 0;
 
-        public decimal Deposit(decimal amount)
+        public decimal Balance
         {
-            balance += amount;
-            return balance;
+            get => balance; 
         }
 
-        public decimal Withdraw(decimal amount)
+        public void Deposit(decimal amount)
+        {
+            balance += amount;
+        }
+
+        public void Withdraw(decimal amount)
         {
             if (balance >= amount)
             {
                 balance -= amount;
-                return balance;
             }
             else
             {
-                throw new InvalidOperationException(String.Format(Constants.InsufficientFundsMessage, balance));
+                throw new InvalidOperationException(FormatHelper.FormatMessage(Constants.InsufficientFundsMessage, balance));
             }
         }
     }

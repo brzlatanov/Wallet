@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Wallet.Interfaces
 {
-    internal interface IValidator
+    internal interface IBettingService
     {
-        IEnumerable<string> ValidateInput(string input);
-        void AddValidationError(string error);
+        decimal PlaceBet(decimal amount);
     }
 }

@@ -11,9 +11,13 @@ namespace Wallet.Data
     {
         internal const string SubmitActionPrompt = "Please, submit action:";
         internal const string InvalidActionError = "Invalid command format. Use: <command> <amount>";
+        internal const string InvalidCommandError = "Invalid command. Available commands: {0}";
         internal const string CommandMustBeAStringError = "Command must be a string.";
         internal const string AmountMustBeANumberError = "Amount must be a number.";
         internal const string AmountMustBePositiveError = "Amount must be positive.";
+        internal const string AmountMustBeWithinRangeError = "Amount must be between {0} and {1}.";
+        internal const string BetLostMessage = "No luck this time! Your current balance is: {0}";
+        internal const string BetWonMessage = "Congrats - you won {0}! Your current balance is: {1}";
         internal const string ExitCommand = "Exit";
         internal const string GoodbyeMessage = "Thank you for playing! Hope to see you again soon!";
         internal const string SuccessfulDepositMessage = "Your deposit of {0} was successful. Your new balance is: {1}";
@@ -21,6 +25,7 @@ namespace Wallet.Data
         internal const string InsufficientFundsMessage = "Insufficient funds for withdrawal. Current balance: {0}";
 
         internal const decimal MinBetAmount = 1;
+        internal const decimal MaxBetAmount = 10;
 
         internal static class Actions
         {

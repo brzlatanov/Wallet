@@ -15,7 +15,8 @@ internal class WithdrawCommandHandler : ICommandHandler
 
     public string Handle(Decimal amount)
     {
-        var newBalance = walletService.Withdraw(amount);
+        this.walletService.Withdraw(amount);
+        var newBalance = this.walletService.Balance;
         return FormatHelper.FormatMessage(Constants.SuccessfulDepositMessage, amount, newBalance);
     }
 }

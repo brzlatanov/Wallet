@@ -1,5 +1,4 @@
 ﻿using Wallet.Interfaces;
-using Wallet.Models;
 
 namespace Wallet.Controllers
 {
@@ -30,6 +29,7 @@ namespace Wallet.Controllers
             string command = input.Split(" ")[0];
             decimal amount = decimal.Parse(input.Split(" ")[1]);
 
+            List<string> messages = new();
             var handler = this.handlers.FirstOrDefault(h => h.CanHandle(command));
             if (handler != null)
             {
@@ -42,6 +42,10 @@ namespace Wallet.Controllers
                 {
                     this.view.RenderView(new List<string> { ex.Message });
                 }
+            }
+            else
+            {
+                this.view.RenderView(new List<string> { message })
             }
         }
     }

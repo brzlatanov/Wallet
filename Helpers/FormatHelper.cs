@@ -19,5 +19,10 @@ namespace Wallet.Helpers
         {
             return String.Format(message, FormatAmount(amount), FormatAmount(newBalance));
         }
+
+        internal static string FormatMessage(string message, decimal newBalance)
+        {
+            return String.Format(message, FormatAmount(newBalance));
+        }
     }
 }

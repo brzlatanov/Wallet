@@ -20,12 +20,5 @@ namespace Wallet.UI
                 }
             }
         }
-
-        public string ReceiveInput()
-        {
-            string action = Console.ReadLine();
-
-            return action;
-        }
     }
 }

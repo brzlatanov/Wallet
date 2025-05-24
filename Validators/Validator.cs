@@ -7,7 +7,7 @@ namespace Wallet.Validators
 {
     internal class Validator : IValidator
     {
-        List<string> ValidationErrors;
+        List<string> ValidationErrors = new();
         public IEnumerable<string> ValidateInput(string value)
         {
             ValidationErrors = new();
@@ -31,24 +31,6 @@ namespace Wallet.Validators
             else if(amount <= 0)
             {
                 AddValidationError(Constants.AmountMustBePositiveError);
-            }
-
-            return this.ValidationErrors;
-        }
-
-        public IEnumerable<string> ValidateObject(object obj)
-        {
-            var context = new ValidationContext(obj);
-            var results = new List<ValidationResult>();
-
-            bool isValid = System.ComponentModel.DataAnnotations.Validator.TryValidateObject(obj, context, results, validateAllProperties: true);
-
-            if (!isValid)
-            {
-                foreach (var validationResult in results)
-                {
-                    AddValidationError(validationResult.ErrorMessage);
-                }
             }
 
             return this.ValidationErrors;
