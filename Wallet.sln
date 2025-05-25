@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36121.58 d17.14
+VisualStudioVersion = 17.14.36121.58
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet", "Wallet.csproj", "{0377AF37-C71D-4C26-979F-C5755D8C67FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletService", "..\WalletService\WalletService.csproj", "{B9B3A7FF-F9A0-4D82-81B3-C4A66E0029CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "..\Constants\Shared.csproj", "{2FE34FF8-0666-4F96-BF4F-9505846A8B9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "..\Data\Data.csproj", "{72CCBDE1-39EA-42FF-BFC0-9ACC9A3B0240}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{0377AF37-C71D-4C26-979F-C5755D8C67FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0377AF37-C71D-4C26-979F-C5755D8C67FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0377AF37-C71D-4C26-979F-C5755D8C67FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9B3A7FF-F9A0-4D82-81B3-C4A66E0029CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9B3A7FF-F9A0-4D82-81B3-C4A66E0029CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9B3A7FF-F9A0-4D82-81B3-C4A66E0029CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9B3A7FF-F9A0-4D82-81B3-C4A66E0029CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FE34FF8-0666-4F96-BF4F-9505846A8B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FE34FF8-0666-4F96-BF4F-9505846A8B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FE34FF8-0666-4F96-BF4F-9505846A8B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FE34FF8-0666-4F96-BF4F-9505846A8B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72CCBDE1-39EA-42FF-BFC0-9ACC9A3B0240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72CCBDE1-39EA-42FF-BFC0-9ACC9A3B0240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72CCBDE1-39EA-42FF-BFC0-9ACC9A3B0240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72CCBDE1-39EA-42FF-BFC0-9ACC9A3B0240}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

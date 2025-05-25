@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wallet.Data
+﻿namespace Wallet.Data
 {
     internal static class Constants
     {
@@ -23,6 +16,7 @@ namespace Wallet.Data
         internal const string SuccessfulDepositMessage = "Your deposit of {0} was successful. Your new balance is: {1}";
         internal const string SuccessfulWithdrawalMessage = "Your withdrawal of {0} was successful. Your new balance is: {1}";
         internal const string InsufficientFundsMessage = "Insufficient funds for withdrawal. Current balance: {0}";
+        internal const string UnsuccessfulDepositMessage = "Deposit failed. Please try again.";
 
         internal const decimal MinBetAmount = 1;
         internal const decimal MaxBetAmount = 10;
@@ -38,3 +32,4 @@ namespace Wallet.Data
         }
     }
 }
+

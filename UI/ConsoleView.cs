@@ -12,7 +12,7 @@ namespace Wallet.UI
     {
         public void RenderView(string message)
         {
-            if (!String.IsNullOrEmpty(message))
+            if (!string.IsNullOrEmpty(message))
             {
                 Console.WriteLine(message);
             }

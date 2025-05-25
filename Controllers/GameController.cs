@@ -1,17 +1,24 @@
-﻿using Wallet.Helpers;
-using Wallet.Interfaces;
-using Wallet.Data;
+﻿using Wallet.Interfaces;
+using Wallet.Shared;
+using Wallet.Helpers;
+using Wallet.Validators;
+using System.Runtime.CompilerServices;
 
 namespace Wallet.Controllers
 {
     internal class GameController : IController
     {
-        IView view;
-        IValidator validator;
-        IEnumerable<ICommandHandler> handlers;
-        public GameController(IView view,
+        private readonly IView view;
+        private readonly IValidator validator;
+        private readonly IEnumerable<ICommandHandler> handlers;
+        
+
+        public GameController(
+            IView view,
             IValidator validator,
-            IEnumerable<ICommandHandler> handlers)
+            IEnumerable<ICommandHandler> handlers  
+        )
+
         {
             this.view = view;
             this.validator = validator;
@@ -38,7 +45,7 @@ namespace Wallet.Controllers
             {
                 try
                 {
-                    var message = handler.Handle(amount);
+                    var message = handler.Handle(amount).Result;
                     this.view.RenderView(message);
                 }
                 catch (Exception ex)

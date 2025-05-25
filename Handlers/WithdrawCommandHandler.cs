@@ -13,10 +13,11 @@ internal class WithdrawCommandHandler : ICommandHandler
 
     public bool CanHandle(string command) => command.Equals(Constants.Actions.Withdraw, StringComparison.OrdinalIgnoreCase);
 
-    public string Handle(Decimal amount)
+    public Task<string> Handle(Decimal amount)
     {
-        this.walletService.Withdraw(amount);
-        var newBalance = this.walletService.Balance;
-        return FormatHelper.FormatMessage(Constants.SuccessfulDepositMessage, amount, newBalance);
+        //this.walletService.Withdraw(amount);
+        //var newBalance = this.walletService.Balance;
+        //return FormatHelper.FormatMessage(Constants.SuccessfulDepositMessage, amount, newBalance);
+        return null;
     }
 }
