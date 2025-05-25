@@ -17,7 +17,8 @@ namespace Wallet.Clients
 
         public async Task<string> GetWalletBalanceAsync()
         {
-            var response = await httpClient.GetAsync("/WalletBalance");
+            string endpoint = config.GetSection("ServiceUrls")["WalletService"];
+            var response = await httpClient.GetAsync($"{endpoint}/WalletBalance");
             return await response.Content.ReadAsStringAsync();
         }
 
@@ -36,6 +37,16 @@ namespace Wallet.Clients
             string endpoint = config.GetSection("ServiceUrls")["WalletService"];
             var response = await httpClient.PostAsync(
                 $"{endpoint}/Withdraw",
+                new StringContent($"{amount}", Encoding.UTF8, "application/json"));
+
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> PlaceBetAsync(decimal amount)
+        {
+            string endpoint = config.GetSection("ServiceUrls")["BettingService"];
+            var response = await httpClient.PostAsync(
+                $"{endpoint}/Bet",
                 new StringContent($"{amount}", Encoding.UTF8, "application/json"));
 
             return response;

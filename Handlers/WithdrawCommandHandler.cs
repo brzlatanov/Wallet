@@ -6,13 +6,10 @@ using Wallet.Shared;
 
 internal class WithdrawCommandHandler : ICommandHandler
 {
-    private readonly IWalletService walletService;
     private readonly IWalletHttpClient walletHttpClient;
 
-    public WithdrawCommandHandler(IWalletService walletService,
-        IWalletHttpClient walletHttpClient)
+    public WithdrawCommandHandler(IWalletHttpClient walletHttpClient)
     {
-        this.walletService = walletService;
         this.walletHttpClient = walletHttpClient;
     }
 

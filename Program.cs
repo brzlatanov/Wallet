@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Wallet.Clients;
 using Wallet.Controllers;
 using Wallet.Interfaces;
-using Wallet.Services;
 using Wallet.Shared;
 using Wallet.UI;
 using Wallet.Validators;
@@ -18,8 +17,6 @@ var serviceProvider = new ServiceCollection()
     .AddTransient<IView, ConsoleView>()
     .AddTransient<IValidator, Validator>()
     .AddSingleton<IConfiguration>(configuration)
-    .AddSingleton<IWalletService, WalletService>()
-    .AddSingleton<IBettingService, BettingService>()
     .AddTransient<ICommandHandler, BetCommandHandler>()
     .AddTransient<ICommandHandler, DepositCommandHandler>()
     .AddTransient<ICommandHandler, WithdrawCommandHandler>()

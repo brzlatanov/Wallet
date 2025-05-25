@@ -6,13 +6,10 @@ using Shared.DTOs;
 
 internal class DepositCommandHandler : ICommandHandler
 {
-    private readonly IWalletService walletService;
     private readonly IWalletHttpClient walletHttpClient;
 
-    public DepositCommandHandler(IWalletService walletService, 
-        IWalletHttpClient walletHttpClient)
+    public DepositCommandHandler(IWalletHttpClient walletHttpClient)
     {
-        this.walletService = walletService;
         this.walletHttpClient = walletHttpClient;
     }
 
@@ -20,7 +17,6 @@ internal class DepositCommandHandler : ICommandHandler
 
     public async Task<string> Handle(Decimal amount)
     {
-        
         var depositResponse = await this.walletHttpClient.DepositAsync(amount);
 
         if(!depositResponse.IsSuccessStatusCode)

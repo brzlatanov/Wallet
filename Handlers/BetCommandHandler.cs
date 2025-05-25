@@ -1,37 +1,54 @@
-﻿using Wallet.Shared;
+﻿using Shared.DTOs;
+using System.Text.Json;
+using Wallet.Helpers;
 using Wallet.Interfaces;
+using Wallet.Shared;
 
 internal class BetCommandHandler : ICommandHandler
 {
-    private readonly IBettingService bettingService;
-    private readonly IWalletService walletService;
+    private readonly IWalletHttpClient walletHttpClient;
 
-    public BetCommandHandler(IBettingService bettingService, IWalletService walletService)
+    public BetCommandHandler(IWalletHttpClient walletHttpClient)
     {
-        this.bettingService = bettingService;
-        this.walletService = walletService;
+        this.walletHttpClient = walletHttpClient;
     }
 
     public bool CanHandle(string command) => command.Equals(Constants.Actions.Bet, StringComparison.OrdinalIgnoreCase);
 
-    public Task<string> Handle(decimal amount)
+    public async Task<string> Handle(decimal amount)
     {
-        //if (amount < Constants.MinBetAmount || amount > Constants.MaxBetAmount)
-        //{
-        //    return FormatHelper.FormatMessage(Constants.AmountMustBeWithinRangeError, Constants.MinBetAmount, Constants.MaxBetAmount);
-        //}
+        // mechanism to check if we can withdraw the amount instead of directly withdrawing it? 
+        if (amount < Constants.MinBetAmount || amount > Constants.MaxBetAmount)
+        {
+            return FormatHelper.FormatMessage(Constants.AmountMustBeWithinRangeError, Constants.MinBetAmount, Constants.MaxBetAmount);
+        }
 
-        //this.walletService.Withdraw(amount);
-        //var amountAfterBet = this.bettingService.PlaceBet(amount);
+        var withdrawResponse = await this.walletHttpClient.WithdrawAsync(amount);
 
-        //if (amountAfterBet > 0)
-        //{
-        //    this.walletService.Deposit(amountAfterBet);
-        //    return FormatHelper.FormatMessage(Constants.BetWonMessage, amountAfterBet, this.walletService.Balance);
-        //}
+        if (!withdrawResponse.IsSuccessStatusCode)
+        {
+            return FormatHelper.FormatMessage(Constants.UnsuccessfulBetMessage, amount);
+        }
 
-        //return FormatHelper.FormatMessage(Constants.BetLostMessage, this.walletService.Balance);
+        var amountAfterBetResponse = await this.walletHttpClient.PlaceBetAsync(amount);
 
-        return null;
+        if (!amountAfterBetResponse.IsSuccessStatusCode)
+        {
+            await this.walletHttpClient.DepositAsync(amount);
+            return FormatHelper.FormatMessage(Constants.UnsuccessfulBetMessage, amount);
+        }
+
+        var responseDto = JsonSerializer.Deserialize<BalanceDTO>(
+            await amountAfterBetResponse.Content.ReadAsStringAsync());
+
+        string newBalance = await this.walletHttpClient.GetWalletBalanceAsync();
+        if (responseDto?.Balance > 0)
+        {
+            var depositResponse = await this.walletHttpClient.DepositAsync(responseDto.Balance);
+            newBalance = await this.walletHttpClient.GetWalletBalanceAsync();
+            return FormatHelper.FormatMessage(Constants.BetWonMessage, responseDto.Balance, newBalance);
+        }  
+
+        return FormatHelper.FormatMessage(Constants.BetLostMessage, newBalance);
     }
 }

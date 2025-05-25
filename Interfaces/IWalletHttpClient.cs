@@ -13,5 +13,7 @@ namespace Wallet.Interfaces
         Task<HttpResponseMessage> DepositAsync(decimal amount);
 
         Task<HttpResponseMessage> WithdrawAsync(decimal amount);
+
+        Task<HttpResponseMessage> PlaceBetAsync(decimal amount);
     }
 }
