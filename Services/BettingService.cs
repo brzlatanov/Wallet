@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wallet.Data;
-using Wallet.Interfaces;
+﻿using Wallet.Interfaces;
 
 namespace Wallet.Services
 {

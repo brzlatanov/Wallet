@@ -1,6 +1,6 @@
 ﻿
 using Wallet.Interfaces;
-using Wallet.Data;
+using Wallet.Shared;
 using Wallet.Helpers;
 
 namespace Wallet.Services

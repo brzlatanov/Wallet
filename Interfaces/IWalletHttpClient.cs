@@ -8,9 +8,10 @@ namespace Wallet.Interfaces
 {
     internal interface IWalletHttpClient
     {
+        Task<string> GetWalletBalanceAsync();
 
-        public Task<string> GetWalletBalanceAsync();
+        Task<HttpResponseMessage> DepositAsync(decimal amount);
 
-        public Task<HttpResponseMessage> DepositAsync(decimal amount);
+        Task<HttpResponseMessage> WithdrawAsync(decimal amount);
     }
 }

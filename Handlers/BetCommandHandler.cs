@@ -1,7 +1,5 @@
-﻿using Wallet.Data;
-using Wallet.Helpers;
+﻿using Wallet.Shared;
 using Wallet.Interfaces;
-using Wallet.Services;
 
 internal class BetCommandHandler : ICommandHandler
 {

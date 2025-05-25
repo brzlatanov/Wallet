@@ -1,6 +1,8 @@
-using Wallet.Data;
+using Wallet.Shared;
 using Wallet.Helpers;
 using Wallet.Interfaces;
+using System.Text.Json;
+using Shared.DTOs;
 
 internal class DepositCommandHandler : ICommandHandler
 {
@@ -18,14 +20,17 @@ internal class DepositCommandHandler : ICommandHandler
 
     public async Task<string> Handle(Decimal amount)
     {
-        var response = await this.walletHttpClient.DepositAsync(amount);
+        
+        var depositResponse = await this.walletHttpClient.DepositAsync(amount);
 
-        if(!response.IsSuccessStatusCode)
+        if(!depositResponse.IsSuccessStatusCode)
         {
-            return Constants.UnsuccessfulDepositMessage;
+            return FormatHelper.FormatMessage(Constants.UnsuccessfulDepositMessage, amount);
         }
 
-        var newBalance = await this.walletHttpClient.GetWalletBalanceAsync();
-        return FormatHelper.FormatMessage(Constants.SuccessfulDepositMessage, amount, newBalance);
+        var responseDto = JsonSerializer.Deserialize<BalanceDTO>(
+            await depositResponse.Content.ReadAsStringAsync());
+
+        return FormatHelper.FormatMessage(Constants.SuccessfulDepositMessage, amount, responseDto.Balance);
     }
 }

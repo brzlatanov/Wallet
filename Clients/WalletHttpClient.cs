@@ -1,30 +1,41 @@
-﻿
-using System.Net.Http;
-using System.Text;
+﻿using System.Text;
 using Wallet.Interfaces;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.Extensions.Configuration;
 
 namespace Wallet.Clients
 {
     internal class WalletHttpClient : IWalletHttpClient
     {
-        private readonly HttpClient _httpClient;
+        private readonly HttpClient httpClient;
+        private readonly IConfiguration config;
 
-        public WalletHttpClient(HttpClient httpClient)
+        public WalletHttpClient(HttpClient httpClient, IConfiguration config)
         {
-            _httpClient = httpClient;
+            this.httpClient = httpClient;
+            this.config = config;
         }
 
         public async Task<string> GetWalletBalanceAsync()
         {
-            var response = await _httpClient.GetAsync("http://localhost:5010/WalletBalance");
+            var response = await httpClient.GetAsync("/WalletBalance");
             return await response.Content.ReadAsStringAsync();
         }
 
         public async Task<HttpResponseMessage> DepositAsync(decimal amount)
         {
-            var response = await _httpClient.PostAsync(
-                "http://localhost:5010/Deposit", 
+            string endpoint = config.GetSection("ServiceUrls")["WalletService"];
+            var response = await httpClient.PostAsync(
+                $"{endpoint}/Deposit", 
+                new StringContent($"{amount}", Encoding.UTF8, "application/json"));
+
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> WithdrawAsync(decimal amount)
+        {
+            string endpoint = config.GetSection("ServiceUrls")["WalletService"];
+            var response = await httpClient.PostAsync(
+                $"{endpoint}/Withdraw",
                 new StringContent($"{amount}", Encoding.UTF8, "application/json"));
 
             return response;
