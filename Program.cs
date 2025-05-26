@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Polly;
+using Polly.Extensions.Http;
 using Wallet.Clients;
 using Wallet.Controllers;
 using Wallet.Interfaces;
@@ -22,6 +24,9 @@ var serviceProvider = new ServiceCollection()
     .AddTransient<ICommandHandler, WithdrawCommandHandler>()
     .AddTransient<GameController>()
     .AddHttpClient<IWalletHttpClient, WalletHttpClient>()
+    .AddPolicyHandler(HttpPolicyExtensions
+        .HandleTransientHttpError()
+        .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromMilliseconds(200)))
     .Services
     .BuildServiceProvider();
 

@@ -5,13 +5,13 @@ VisualStudioVersion = 17.14.36121.58
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet", "Wallet.csproj", "{0377AF37-C71D-4C26-979F-C5755D8C67FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletService", "..\WalletService\WalletService.csproj", "{B9B3A7FF-F9A0-4D82-81B3-C4A66E0029CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletService.Api", "..\WalletService\WalletService.Api.csproj", "{B9B3A7FF-F9A0-4D82-81B3-C4A66E0029CD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "..\Constants\Shared.csproj", "{2FE34FF8-0666-4F96-BF4F-9505846A8B9F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "..\Data\Data.csproj", "{72CCBDE1-39EA-42FF-BFC0-9ACC9A3B0240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BettingService", "..\BettingService\BettingService.csproj", "{A054F95E-FB95-41BD-B71C-7A2AA4652887}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BettingService.Api", "..\BettingService\BettingService.Api.csproj", "{A054F95E-FB95-41BD-B71C-7A2AA4652887}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

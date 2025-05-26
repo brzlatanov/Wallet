@@ -1,7 +1,6 @@
 ﻿using Wallet.Interfaces;
 using Wallet.Shared;
 using Wallet.Helpers;
-using Wallet.Validators;
 using System.Runtime.CompilerServices;
 
 namespace Wallet.Controllers

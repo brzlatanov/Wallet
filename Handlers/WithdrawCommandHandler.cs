@@ -30,6 +30,6 @@ internal class WithdrawCommandHandler : ICommandHandler
         var responseDto = JsonSerializer.Deserialize<BalanceDTO>(
         await withdrawResponse.Content.ReadAsStringAsync());
 
-        return FormatHelper.FormatMessage(Constants.SuccessfulDepositMessage, amount, responseDto.Balance);
+        return FormatHelper.FormatMessage(Constants.SuccessfulWithdrawalMessage, amount, responseDto.Balance);
     }
 }
