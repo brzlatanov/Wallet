@@ -54,7 +54,7 @@ namespace Wallet.Controllers
             }
             else
             {
-                this.view.RenderView(FormatHelper.FormatMessage(Constants.InvalidCommandError, String.Join(",", Constants.Actions.All)));
+                this.view.RenderView(FormatHelper.FormatMessage(Constants.InvalidCommandError, String.Join(", ", Constants.Actions.All)));
             }
         }
     }

@@ -5,9 +5,11 @@ using Polly.Extensions.Http;
 using Wallet.Clients;
 using Wallet.Controllers;
 using Wallet.Interfaces;
+using Wallet.Services;
 using Wallet.Shared;
 using Wallet.UI;
 using Wallet.Validators;
+using System.Runtime.CompilerServices;
 
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", 
@@ -22,6 +24,7 @@ var serviceProvider = new ServiceCollection()
     .AddTransient<ICommandHandler, BetCommandHandler>()
     .AddTransient<ICommandHandler, DepositCommandHandler>()
     .AddTransient<ICommandHandler, WithdrawCommandHandler>()
+    .AddTransient<IBettingOrchestrationService, BettingOrchestrationService>()
     .AddTransient<GameController>()
     .AddHttpClient<IWalletHttpClient, WalletHttpClient>()
     .AddPolicyHandler(HttpPolicyExtensions

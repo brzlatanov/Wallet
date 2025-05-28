@@ -1,7 +1,10 @@
-﻿using System.Text;
+﻿using Microsoft.Extensions.Configuration;
+using System.Runtime.CompilerServices;
+using System.Text;
 using Wallet.Interfaces;
-using Microsoft.Extensions.Configuration;
 
+[assembly: InternalsVisibleTo("Wallet.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 namespace Wallet.Clients
 {
     internal class WalletHttpClient : IWalletHttpClient
